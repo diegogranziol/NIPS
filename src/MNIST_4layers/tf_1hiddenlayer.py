@@ -27,6 +27,7 @@ import sys
 
 from tensorflow.examples.tutorials.mnist import input_data
 from pathos.multiprocessing import ProcessingPool as Pool
+from scipy.ndimage import zoom
 
 import tensorflow as tf
 import matplotlib as plt
@@ -109,16 +110,26 @@ def jacobian_piece(vect, parameters, index):
   ddfx_i = tf.gradients(dfx_i, parameters)[0] 
   return ddfx_i
 
+def zoom_mnist(data,input_size):
+  reshaped = data.reshape(-1,28,28)
+  zoomed = zoom(reshaped,(1,input_size/28,input_size/28)).reshape(-1,input_size*input_size)
+  return zoomed
+
 def main(_):
 
   local_save_dir=FLAGS.save_dir+'/i'+str(FLAGS.input_size)+'_h'+str(FLAGS.hidden_size)+'_o'+str(FLAGS.output_size)+'_b'+str(FLAGS.batch_size)
   ensure_dir(local_save_dir)
   mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
 
+
+  mnist.train._images=zoom_mnist(mnist.train._images,FLAGS.input_size)
+  mnist.test._images=zoom_mnist(mnist.test._images,FLAGS.input_size)
+
+
   y_ = tf.placeholder(tf.float32, [None, FLAGS.output_size])
 
 
-  x, y, parameters = makeMLP(FLAGS.batch_size,FLAGS.input_size,FLAGS.hidden_size,FLAGS.output_size)
+  x, y, parameters = makeMLP(FLAGS.batch_size,FLAGS.input_size*FLAGS.input_size,FLAGS.hidden_size,FLAGS.output_size)
 
 
   # The raw formulation of cross-entropy,
