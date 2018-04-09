@@ -37,10 +37,9 @@ import os
 
 FLAGS = None
 
-def ensure_dir(file_path):
-    directory = os.path.dirname(file_path)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+def ensure_dir(directory):
+  if not os.path.exists(directory):
+    os.makedirs(directory)
 
 def weight_variable(shape):
   """weight_variable generates a weight variable of a given shape."""
@@ -117,7 +116,7 @@ def zoom_mnist(data,input_size):
 
 def main(_):
 
-  local_save_dir=FLAGS.save_dir+'/i'+str(FLAGS.input_size)+'_h'+str(FLAGS.hidden_size)+'_o'+str(FLAGS.output_size)+'_b'+str(FLAGS.batch_size)
+  local_save_dir=FLAGS.save_dir+'/i'+str(FLAGS.input_size)+'_h'+str(FLAGS.hidden_size)+'_o'+str(FLAGS.output_size)+'_b'+str(FLAGS.batch_size) 
   ensure_dir(local_save_dir)
   mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
 
@@ -189,7 +188,7 @@ if __name__ == '__main__':
 
   parser.add_argument('--output_size', type=int, default=10)
 
-  parser.add_argument('--hidden_size', type=int, default=50)
+  parser.add_argument('--hidden_size', type=int, default=40)
 
   parser.add_argument('--batch_size', type=int, default=50)
 
