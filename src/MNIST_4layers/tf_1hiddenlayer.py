@@ -161,9 +161,10 @@ train_accuracy = []
 for i in range(20000):
   batch = mnist.train.next_batch(batch_size)
   if i % 100 == 0:
-    np.save(save_dir+'/hess'+str(i)+'.npy', hess.eval(feed_dict={x: batch[0], y_: batch[1]}))
     train_accuracy.append(accuracy.eval(feed_dict={x: batch[0], y_: batch[1]}))
     print('step %d, training accuracy %g' % (i, train_accuracy[-1]))
+  if i % 1000 ==0:
+    np.save(save_dir+'/hess'+str(i)+'.npy', hess.eval(feed_dict={x: batch[0], y_: batch[1]}))
   train_step.run(feed_dict={x: batch[0], y_: batch[1]})
 
 
