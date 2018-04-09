@@ -111,7 +111,7 @@ def jacobian_piece(vect, parameters, index):
 
 def main(_):
 
-  local_save_dir=FLAGS.save_dir+'/i'+str(input_size)+'_h'+str(hidden_size)+'_o'+str(output_size)+'_b'+str(batch_size))
+  local_save_dir=FLAGS.save_dir+'/i'+str(input_size)+'_h'+str(hidden_size)+'_o'+str(output_size)+'_b'+str(batch_size)
   ensure_dir(local_save_dir)
   mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
 
