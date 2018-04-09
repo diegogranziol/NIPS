@@ -53,9 +53,9 @@ def bias_variable(shape):
   initial = tf.constant(0.1, shape=shape)
   return tf.Variable(initial)
 
-def makeMLP(batch_size, n_input, n_hidden, n_output):
+def makeMLP(n_input, n_hidden, n_output):
   # First create placeholders for inputs and targets: x_input, y_target
-  x_input = tf.placeholder(tf.float32, shape=[batch_size, n_input])
+  x_input = tf.placeholder(tf.float32, shape=[None, n_input])
   #
   # Start constructing a computational graph for multilayer perceptron
   ###  Since we want to store parameters as one long vector, we first define our parameters as below and then
@@ -129,7 +129,7 @@ def main(_):
   y_ = tf.placeholder(tf.float32, [None, FLAGS.output_size])
 
 
-  x, y, parameters = makeMLP(FLAGS.batch_size,FLAGS.input_size*FLAGS.input_size,FLAGS.hidden_size,FLAGS.output_size)
+  x, y, parameters = makeMLP(FLAGS.input_size*FLAGS.input_size,FLAGS.hidden_size,FLAGS.output_size)
 
 
   # The raw formulation of cross-entropy,
