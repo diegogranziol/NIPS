@@ -172,7 +172,7 @@ def main(_):
       if i % 1000 ==0:
         np.save(local_save_dir+'/hess'+str(i)+'.npy', hess.eval(feed_dict={x: batch[0], y_: batch[1]}))
       train_step.run(feed_dict={x: batch[0], y_: batch[1]})
-    np.save(local_save_dir+'/accuracy.npy',np.hstack(np.arange(0,20001,100),np.array(train_accuracy),np.array(test_accuracy)))
+    np.save(local_save_dir+'/accuracy.npy',np.concat(np.arange(0,20001,100),np.array(train_accuracy),np.array(test_accuracy),axis=1))
     print('end')
 
 
