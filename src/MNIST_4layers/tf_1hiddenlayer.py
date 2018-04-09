@@ -168,10 +168,10 @@ def main(_):
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
-  parser.add_argument('--data_dir', type=str, default='~/mnist/input_data',
+  parser.add_argument('--data_dir', type=str, default='/jmain01/home/JAD017/sjr01/mxw35-sjr01/mnist/input_data',
                       help='Directory for storing input data')
 
-  parser.add_argument('--save_dir', type=str, default='~/Projects/NIPS/output/MNIST/hessians',
+  parser.add_argument('--save_dir', type=str, default='/jmain01/home/JAD017/sjr01/mxw35-sjr01/Projects/NIPS/output/MNIST/hessians',
                       help='Directory for saving hessians and other data')
 
   parser.add_argument('--input_size', type=int, default=28)
