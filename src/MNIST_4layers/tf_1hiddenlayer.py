@@ -111,7 +111,7 @@ def jacobian_piece(vect, parameters, index):
 
 def main(_):
 
-  local_save_dir=FLAGS.save_dir+'/i'+str(input_size)+'_h'+str(hidden_size)+'_o'+str(output_size)+'_b'+str(batch_size)
+  local_save_dir=FLAGS.save_dir+'/i'+str(FLAGS.input_size)+'_h'+str(FLAGS.hidden_size)+'_o'+str(FLAGS.output_size)+'_b'+str(FLAGS.batch_size)
   ensure_dir(local_save_dir)
   mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
 
@@ -153,7 +153,7 @@ def main(_):
   with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     for i in range(20001):
-      batch = mnist.train.next_batch(batch_size)
+      batch = mnist.train.next_batch(FLAGS.batch_size)
       if i % 100 == 0:
         train_accuracy.append(accuracy.eval(feed_dict={x: batch[0], y_: batch[1]}))
         print('step %d, training accuracy %g' % (i, train_accuracy[-1]))
